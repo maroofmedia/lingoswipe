@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>LingoSwipe</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+
+<body>
+
+    <div id="homepage-screen" class="screen scrollable">
+        <nav class="home-nav">
+            <div class="nav-left">
+                <span class="material-icons-round" style="color:var(--primary)">bolt</span>
+                <span>LingoSwipe</span>
+            </div>
+            <div class="nav-right">
+                <button class="icon-btn-sm" onclick="openSaved()" title="My Collection">
+                    <span class="material-icons-round">bookmarks</span>
+                </button>
+                <button class="icon-btn-sm" onclick="openSettings()" title="Settings">
+                    <span class="material-icons-round">settings</span>
+                </button>
+            </div>
+        </nav>
+
+        <section class="hero-section">
+            <h1 class="hero-title">Fuel Your<br><span class="gradient-text">Vocabulary.</span></h1>
+            <p class="hero-sub">Swipe through curated words. Learn slang, corporate jargon, or literary gems in seconds.
+            </p>
+
+            <div class="catalog-grid">
+                <div class="catalog-item" onclick="selectGoal('Daily Slang')">
+                    <span class="cat-emoji">🔥</span>
+                    <span class="cat-name">Daily Slang</span>
+                </div>
+                <div class="catalog-item" onclick="selectGoal('Corporate Lingo')">
+                    <span class="cat-emoji">💼</span>
+                    <span class="cat-name">Corporate</span>
+                </div>
+                <div class="catalog-item" onclick="selectGoal('GRE & Academic')">
+                    <span class="cat-emoji">🎓</span>
+                    <span class="cat-name">Academic</span>
+                </div>
+                <div class="catalog-item" onclick="selectGoal('Street Smart')">
+                    <span class="cat-emoji">🛹</span>
+                    <span class="cat-name">Street Smart</span>
+                </div>
+                <div class="catalog-item" onclick="selectGoal('Literature')">
+                    <span class="cat-emoji">📚</span>
+                    <span class="cat-name">Literature</span>
+                </div>
+                <div class="catalog-item" onclick="selectGoal('Travel & Culture')">
+                    <span class="cat-emoji">✈️</span>
+                    <span class="cat-name">Travel</span>
+                </div>
+            </div>
+        </section>
+
+        <footer class="home-footer">
+            <p>Made with <span class="heart">♥</span> by Maroof Lone</p>
+        </footer>
+    </div>
+
+    <div id="app-screen" class="screen">
+        <header class="app-header">
+            <div class="header-left">
+                <button class="icon-btn" onclick="goHome()" title="Back to Home" style="margin-right: 8px;">
+                    <span class="material-icons-round">arrow_back</span>
+                </button>
+                
+                <div class="pill-badge" id="goal-badge-pill" onclick="openSettings()">
+                    </div>
+            </div>
+
+            <div class="header-right">
+                <button class="icon-btn" onclick="openSaved()" title="Collection">
+                    <span class="material-icons-round">bookmarks</span>
+                </button>
+                <button class="icon-btn" onclick="openSettings()" title="Settings">
+                    <span class="material-icons-round">settings</span>
+                </button>
+            </div>
+        </header>
+
+        <main id="card-stack">
+            <div id="loading-card" class="card">
+                <div class="loader-spinner"></div>
+                <p id="loading-text">Consulting the library...</p>
+            </div>
+        </main>
+    </div>
+
+    <div id="settings-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Settings</h2>
+                <button class="close-btn" onclick="closeModal('settings-modal')">&times;</button>
+            </div>
+
+            <div class="setting-section">
+                <label class="setting-label">Complexity Level</label>
+                <div class="segment-control">
+                    <button class="segment" data-val="Easy" onclick="setDiff('Easy')">Easy</button>
+                    <button class="segment" data-val="Medium" onclick="setDiff('Medium')">Medium</button>
+                    <button class="segment" data-val="Hard" onclick="setDiff('Hard')">Hard</button>
+                </div>
+            </div>
+
+            <div class="setting-section" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 12px;">
+                <label class="setting-label" style="color:var(--primary)">About this App</label>
+                <p style="font-size: 0.9rem; color: #ccc; line-height: 1.5; margin: 0;">
+                    This app is powered by <strong>Pollinations.ai</strong>, a free, open-source AI API. 
+                    <br><br>
+                    No API keys or credit cards required. Enjoy unlimited learning!
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div id="saved-modal" class="modal">
+        <div class="modal-content full-height">
+            <div class="modal-header">
+                <h2>My Collection</h2>
+                <button class="close-btn" onclick="closeModal('saved-modal')">&times;</button>
+            </div>
+            <div id="saved-list" class="scroll-list">
+                </div>
+        </div>
+    </div>
+
+    <template id="error-template">
+        <div class="error-state">
+            <span class="error-emoji">😵‍💫</span>
+            <h3>Uh oh! Connection Glitch</h3>
+            <p>We couldn't fetch a new word. Check your internet or try again.</p>
+            <button class="btn btn-primary" onclick="loadNextWord()">Try Again</button>
+        </div>
+    </template>
+
+    <script type="module" src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a277ff" />
+      <stop offset="100%" stop-color="#ff0080" />
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="512" height="512" rx="120" fill="#16161a" />
+  
+  <!-- Card 1 (Back) -->
+  <rect x="130" y="140" width="250" height="300" rx="30" fill="rgba(255,255,255,0.1)" transform="rotate(-15 255 290)" />
+  
+  <!-- Card 2 (Front) -->
+  <rect x="131" y="106" width="250" height="300" rx="30" fill="url(#grad)" transform="rotate(5 256 256)" />
+  
+  <!-- "S" or Swipe Motion Line -->
+  <path d="M190 256 C 190 256, 256 200, 320 256" stroke="white" stroke-width="20" stroke-linecap="round" fill="none" transform="rotate(5 256 256)"/>
+</svg>
